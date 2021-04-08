@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+
+        <script>
+            function wrong(self) {
+                let elem = self;
+                while (elem.nodeName.toLowerCase() != "p") {
+                    elem = elem.nextElementSibling;
+                }
+                elem.innerHTML = "Incorrect.";
+            }
+
+            function right(self) {
+                let elem = self;
+                while (elem.nodeName.toLowerCase() != "p") {
+                    elem = elem.nextElementSibling;
+                }
+                elem.innerHTML = "Correct!"; //innerHTML vs value?
+            }
+
+            function changeRed(self) {
+                self.style.backgroundColor = "red";
+                wrong(self);
+            }
+
+            function changeGreen(self) {
+                self.style.backgroundColor = "green";
+                right(self);
+            }
+
+            function checkAns(self, ans) {
+                if (self.previousElementSibling.value.toLowerCase() == ans) {
+                    self.previousElementSibling.style.backgroundColor = "green";
+                    right(self);
+                }
+                else {
+                    self.previousElementSibling.style.backgroundColor = "red";
+                    wrong(self);
+                }
+                //document.write(innerText.id);
+            }
+
+        </script>
+
+    </head>
+    <body>
+
+        <div class="jumbotron">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <ol>
+                    <li><h3>Who was the best 3-point shooter on the 2008 NBA Finals winning Celtics Team?</h3> <br>
+                    <button type="button" value="Paul Pierce" onclick = "changeRed(this)"> Paul Pierce </button> <br> <br>
+                    <button type="button" value="Kevin Garnett" onclick = "changeRed(this)"> Kevin Garnett </button> <br> <br>
+                    <button type="button" value="Ray Allen" onclick = "changeGreen(this)"> Ray Allen </button> <br> <br>
+                    <p id="pmc1"></p> </li>
+                    <br>
+
+
+                    <li><h3>What was the real name of the player named "Big Baby"? </h3> <br>
+                    <button type="button" name="q2" value="Kendrick Perkins" onclick = "changeRed(this)"> Kendrick Perkins </button> <br> <br>
+                    <button type="button" name="q2" value="Rajon Rando" onclick = "changeRed(this)"> Rajon Rondo </button> <br> <br>
+                    <button type="button" name="q2" value="Glen Davis" onclick = "changeGreen(this)"> Glen Davis </button> <br> <br>
+                    <p id="pmc2"></p> </li>
+                    <br>
+
+                    <li><h3> What is your favorite basketball team? </h3> <br>
+                    <button type="button" name="q3" value="Celtics" onclick="changeGreen(this)">Celtics </button><br><br>
+                    <button type="button" name="q3" value="Lakers" onclick="changeRed(this)">Lakers </button><br><br>
+                    <button type="button" name="q3" value="Warriors" onclick="changeRed(this)">Warriors </button><br>
+                    <p id="pmc3"></p> </li>
+
+                <!-- TODO: Add multiple choice question here -->
+
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>Please describe in excruciating detail why you like the Celtics. </h3><br>
+                <input type="text" name="frq1response" id="frq1r1">
+                <button id = "frq1b1" type="button" value="Submit" onclick="checkAns(this, 'yup')">Submit</button><br>
+                <p id="pfr1"></p>
+
+                <h3> Are we talking about a game or practice? </h3> <br>
+                <input type="text" name="frq2response" id="frq2r1">
+                <button type="button" id="frq2b1" value="Submit" onclick="checkAns(this, 'practice')">Submit</button>
+                <p id="pfr2"></p>
+            </div>
+
+        </div>
+    </body>
+</html>
